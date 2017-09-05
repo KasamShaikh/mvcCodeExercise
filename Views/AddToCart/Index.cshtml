@@ -1,0 +1,79 @@
+﻿@model  IEnumerable <mvcCodeExercise.Models.Product>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>My Orders</h2>
+
+@if (Model == null)
+{
+    <h2>No products added to basket, kindly go to Product page, Click on Shopify!</h2>
+}
+else
+{
+
+<table id="customers" class="table table-bordered table-hover">
+    <thead>
+
+        <tr>
+            <th> Product No.</th>
+            <th> Category </th>
+            <th> Description </th>
+            <th> Discount </th>
+            <th> Price</th>
+            <th> do something </th>
+        </tr>
+
+    </thead> 
+    <tbody>
+
+        @foreach (var pro in Model)
+        {
+            <tr>
+                <td>
+                   @pro.productID
+                </td>
+                <td>
+                    @pro.productCategory
+                </td>
+                <td>@pro.productDescription</td>
+                <td>
+                    @pro.productDiscount
+                </td>
+                <td>
+                    @pro.productPrice
+                </td>
+                <td>
+                   @Html.ActionLink("Remove from Basket", "Remove", new { id = pro.productID }, null)
+
+                </td>
+
+            </tr>
+
+
+        }
+
+
+    </tbody>
+
+
+</table>
+}
+
+@section scripts
+{
+    <script>
+
+        $(document).ready(function () {
+            $("#customers").DataTable();
+
+         
+        });
+    </script>
+}
+
+
+
+
+

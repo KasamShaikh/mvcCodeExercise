@@ -1,0 +1,71 @@
+﻿@model mvcCodeExercise.ViewModel.ShopViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Shop Product</h2>
+
+<table id="products" class="table table-bordered table-hover">
+    <thead>
+
+        <tr>
+            <th> Product No.</th>
+            <th> Category </th>
+            <th> Description </th>
+            <th> Discount </th>
+            <th> Price</th>
+            <th> do something </th>
+        </tr>
+
+    </thead>
+    <tbody>
+
+
+    </tbody>
+
+
+</table>
+
+@section scripts
+{
+    <script>
+
+        $(document).ready(function () {
+            $("#products").DataTable({
+                ajax: {
+                    url: "/api/products",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "productID",
+                        render: function (data, type, customer) {
+                            return "<a href='/shop/details/" + customer.productID + "'>" + customer.productID + "</a>";
+                        }
+                    },
+                    {
+                        data: "productCategory"
+                    },
+                    {
+                        data: "productDescription"
+                    }, 
+                    {
+                        data: "productDiscount"
+                    },
+                    {
+                        data: "productPrice"
+                    },
+                    {
+                        data: "productID",
+                        render: function (data, type, customer) {
+                            return "<a href='/AddToCart/Add/" + customer.productID + "'>Add to Basket</a>";
+                           
+                        }
+                    }
+                ]
+            });
+
+            
+        });
+    </script>
+}
